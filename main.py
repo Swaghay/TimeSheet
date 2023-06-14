@@ -1,19 +1,50 @@
 from tkinter import ttk
 import tkinter as tk       
 
+programList = ['Project1', 'Project2', 'Project3', 'Project4', 'Create New Project']
+
 class Application(tk.Frame):              
     def __init__(mainFrame, master=None):
-        tk.Frame.__init__(mainFrame, master)   
-        mainFrame.grid(ipadx=300, ipady=200)                       
-        label = ttk.Label(mainFrame, text='Select a Project')
-        programs = ttk.Combobox(mainFrame, state="readonly", values=['Project1', 'Project2', 'Project3', 'Project4'], textvariable = 'Select a Project')
-        label.grid(row=0, column=0)
-        programs.grid(row=1, column=0)
-        mainFrame.grid_rowconfigure(0, weight=1)
-        mainFrame.grid_rowconfigure(1, weight=1)
-        mainFrame.grid_columnconfigure(0, weight=1)
-        
+        tk.Frame.__init__(mainFrame, master)
+        mainFrame.grid(padx=70,pady=70)
 
-app = Application()                       
+def mainFrameButtonFunction():
+    if programs.get() == 'Create New Project':
+
+        def newProjectWindowButtonFunction():
+            if newProjectTextBox.get() != '' and newProjectTextBox.get() not in programs['values']:
+                programs['values'] += (newProjectTextBox.get(),)
+
+        newProjectWindow = tk.Toplevel(width=300, height = 300)
+        newProjectWindow.title(programs.get())
+        newProjectWindow.resizable(False, False)
+
+        newProjectTextBox = ttk.Entry(newProjectWindow)
+        newProjectButton = ttk.Button(newProjectWindow, command=newProjectWindowButtonFunction, text='Create')
+        newProjectLabel = ttk.Label(newProjectWindow, text='Name The Project')
+        newProjectTextBox.place(relx=.3, rely=.4)
+        newProjectButton.place(relx=.38, rely = .5)
+        newProjectLabel.place(relx=.346, rely = .3)
+
+        newProjectWindow.mainloop()
+    elif programs.get() != "":
+        programWindow = tk.Toplevel()
+        programWindow.title(programs.get())
+        programWindow.geometry("300x300")
+        programWindow.resizable(False, False)
+
+        programWindow.mainloop()
+
+
+app = Application()
+
+label = ttk.Label(app, text='Select a Project')
+programs = ttk.Combobox(app, state="readonly", values= programList, textvariable = 'Select a Project')
+button = ttk.Button(app, command = mainFrameButtonFunction, text='Open')
+label.grid(row=0, column=0, pady=10)
+programs.grid(row=1, column=0)
+button.grid(row=2, column=0, pady=10)     
+
 app.master.title('TimeSheet++')    
+app.master.resizable(False, False)
 app.mainloop()  
