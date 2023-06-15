@@ -10,7 +10,6 @@ class Application(tk.Frame):
 
 def mainFrameButtonFunction():
     if programs.get() == 'Create New Project':
-
         def newProjectWindowButtonFunction():
             if newProjectTextBox.get() != '' and newProjectTextBox.get() not in programs['values']:
                 programs['values'] += (newProjectTextBox.get(),)
