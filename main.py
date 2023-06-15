@@ -1,7 +1,7 @@
 from tkinter import ttk
 import tkinter as tk       
 
-programList = ['Project1', 'Project2', 'Project3', 'Project4', 'Create New Project']
+programList = ['Create New Project', 'Project1', 'Project2', 'Project3', 'Project4']
 
 class Application(tk.Frame):              
     def __init__(mainFrame, master=None):
@@ -14,6 +14,7 @@ def mainFrameButtonFunction():
         def newProjectWindowButtonFunction():
             if newProjectTextBox.get() != '' and newProjectTextBox.get() not in programs['values']:
                 programs['values'] += (newProjectTextBox.get(),)
+                newProjectWindow.destroy()
 
         newProjectWindow = tk.Toplevel(width=300, height = 300)
         newProjectWindow.title(programs.get())
@@ -28,10 +29,23 @@ def mainFrameButtonFunction():
 
         newProjectWindow.mainloop()
     elif programs.get() != "":
-        programWindow = tk.Toplevel()
+        currProgram = programs.get()
+
+        def deleteProgramButtonFunction():
+            newProgramList = []
+            for program in programs['values']:
+                if program != currProgram:
+                    newProgramList.append(program)
+            programs['values'] = newProgramList
+            programs.delete(0,'end')
+            programWindow.destroy()
+
+        programWindow = tk.Toplevel(width=300, height=300)
         programWindow.title(programs.get())
-        programWindow.geometry("300x300")
         programWindow.resizable(False, False)
+
+        deleteProgramButton = ttk.Button(programWindow, command=deleteProgramButtonFunction, text='Delete')
+        deleteProgramButton.place(relx=.38, rely = .5)
 
         programWindow.mainloop()
 
