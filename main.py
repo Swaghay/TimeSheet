@@ -27,6 +27,7 @@ def mainFrameButtonFunction():
         newProjectLabel.place(relx=.5, rely = .35, anchor='center')
 
         newProjectWindow.mainloop()
+        
     elif programs.get() != "":
         currProgram = programs.get()
 
