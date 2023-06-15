@@ -15,16 +15,16 @@ def mainFrameButtonFunction():
                 programs['values'] += (newProjectTextBox.get(),)
                 newProjectWindow.destroy()
 
-        newProjectWindow = tk.Toplevel(width=300, height = 300)
+        newProjectWindow = tk.Toplevel(width=300, height = 275)
         newProjectWindow.title(programs.get())
         newProjectWindow.resizable(False, False)
 
         newProjectTextBox = ttk.Entry(newProjectWindow)
         newProjectButton = ttk.Button(newProjectWindow, command=newProjectWindowButtonFunction, text='Create')
         newProjectLabel = ttk.Label(newProjectWindow, text='Name The Project')
-        newProjectTextBox.place(relx=.3, rely=.4)
-        newProjectButton.place(relx=.38, rely = .5)
-        newProjectLabel.place(relx=.346, rely = .3)
+        newProjectTextBox.place(relx=.5, rely=.45, anchor='center')
+        newProjectButton.place(relx=.5, rely = .55, anchor='center')
+        newProjectLabel.place(relx=.5, rely = .35, anchor='center')
 
         newProjectWindow.mainloop()
     elif programs.get() != "":
@@ -37,6 +37,7 @@ def mainFrameButtonFunction():
                     newProgramList.append(program)
             programs['values'] = newProgramList
             programs.delete(0,'end')
+            programs.set('')
             programWindow.destroy()
 
         programWindow = tk.Toplevel(width=300, height=300)
@@ -44,7 +45,7 @@ def mainFrameButtonFunction():
         programWindow.resizable(False, False)
 
         deleteProgramButton = ttk.Button(programWindow, command=deleteProgramButtonFunction, text='Delete')
-        deleteProgramButton.place(relx=.38, rely = .5)
+        deleteProgramButton.place(relx=.5, rely = .5, anchor='center')
 
         programWindow.mainloop()
 
