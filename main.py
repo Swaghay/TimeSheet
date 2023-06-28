@@ -14,7 +14,7 @@ def open_projects_file():
 try:
     projectList = open_projects_file()
 except:
-    projectList = ['Create New Project', 'Project1', 'Project2', 'Project3', 'Project4']
+    projectList = ['Create New Project']
 
 class Application(tk.Frame):              
     def __init__(mainFrame, master=None):
